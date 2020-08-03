@@ -2,7 +2,7 @@ import axios from "axios";
 
 const THDB_KEY = "43d1cb232767ef5c553e1bce9ae70ba2"; //apI 사용하기위한 key
 
-const makeRequest = (
+const makeRequesta = (
   path,
   params // path 와 params 값을 전달
 ) =>
