@@ -31,14 +31,14 @@ export default () => {
 
     })
   };
-  console.log(shows.popular?.length)
+  console.log(shows.popular.length)
 
   useEffect(() => {
     getData();
   }, []);
   return (
     <View>
-      <Text>{shows.popular?.length}</Text>
+      <Text>{shows.popular.length}</Text>
     </View>
   );
 };

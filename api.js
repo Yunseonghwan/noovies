@@ -16,7 +16,7 @@ const makeRequest = (
 const getAnyThing = async (path, params = {}) => {
   try {
     const {
-      data: { result },
+      data: { result},
       data
     } = await makeRequest(path, params)
     return [result || data, null]

@@ -7,7 +7,7 @@ import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import Stack from "./navigation/Stack";
 
-
+// 4.2부터 시청
 
 //StartAsyne 는 promise를 리턴하는 함수
 
@@ -19,7 +19,6 @@ const cacheImages = (images) =>
       return Asset.fromModule(image).downloadAsync(); //image module
     }
   }); //이미지들의 어레이
-console.log(image)
 const cacheFonts = (fonts) =>
   fonts.map((font) => [Font.loadAsync(font), Font.loadAsync(font)]);
 
