@@ -42,7 +42,7 @@ export default class Back extends Component {
     }
     render(){
         return(
-            <App onChange={this.handleBackButton}/>
+            <App onPress={this.handleBackButton}/>
         )
     }
 

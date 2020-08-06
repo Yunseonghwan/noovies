@@ -2,44 +2,43 @@ import axios from "axios";
 
 const THDB_KEY = "43d1cb232767ef5c553e1bce9ae70ba2"; //apI 사용하기위한 key
 
-const makeRequest = (
-  path,
-  params // path 와 params 값을 전달
-) =>
+const makeRequest = (path, params) =>
   axios.get(`https://api.themoviedb.org/3${path}`, {
     params: {
       ...params,
-      api_key: THDB_KEY,
-    },
+      api_key: THDB_KEY
+    }
   });
 
-const getAnyThing = async (path, params = {}) => {
+const getAnything = async (path, params = {}) => {
   try {
     const {
-      data: { result},
+      data: { results },
       data
-    } = await makeRequest(path, params)
-    return [result || data, null]
+    } = await makeRequest(path, params);
+    return [results || data, null];
   } catch (e) {
-    console.log(e)
-    return [null, e]
+    console.log(e);
+    return [null, e];
   }
 };
 
 export const movieApi = {
-  nowPlaying: () => getAnyThing("/movie/now_playing"),
-  popular: () => getAnyThing("/movie/popular"),
-  upcoming: () => getAnyThing("/movie/upcoming", { region: "kr" }), // 지역 한국으로 성정
-  search: (query) => getAnyThingt("/search/movie", { query }), // query 검색
-  movie: (id) => getAnyThing(`/movie/${id}`),
-  discover: () => getAnyThing("/discover/movie"),
+  nowPlaying: () => getAnything("/movie/now_playing"),
+  popular: () => getAnything("/movie/popular"),
+  upcoming: () => getAnything("/movie/upcoming", { region: "kr" }),
+  search: query => getAnything("/search/movie", { query }),
+  movie: id => getAnything(`/movie/${id}`, { append_to_response: "videos" }),
+  discover: () => getAnything("/discover/movie")
 };
 
 export const tvApi = {
-  today: () => getAnyThing("/tv/airing_today"),
-  thisWeek: () => getAnyThing("/tv/on_the_air"),
-  topRated: () => getAnyThing("/tv/top_rated"),
-  popular: () => getAnyThing("/tv/popular"),
-  search: (query) => getAnyThing("/search/tv", { query }),
-  show: (id) => getAnyThing(`/tv/${id}`),
+  today: () => getAnything("/tv/airing_today"),
+  thisWeek: () => getAnything("/tv/on_the_air"),
+  topRated: () => getAnything("/tv/top_rated"),
+  popular: () => getAnything("/tv/popular"),
+  search: query => getAnything("/search/tv", { query }),
+  show: id => getAnything(`/tv/${id}`, { append_to_response: "videos" })
 };
+
+export const apiImage = (path) => `https://image.tmdb.org/t/p/w500${path}`
