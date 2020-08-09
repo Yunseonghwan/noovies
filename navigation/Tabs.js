@@ -7,7 +7,7 @@ import Search from "../screens/Search";
 import Favs from "../screens/Favs";
 import { Platform } from "react-native"; //android 랑 ios 구분해서쓸때
 
-const Tabs = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator();  //bottom 메뉴 호출
 
 const getHeaderName = (route) =>
   route?.state?.routeNames[route.state.index] || "Movies";

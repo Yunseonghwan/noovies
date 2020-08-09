@@ -7,6 +7,7 @@ import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import Stack from "./navigation/Stack";
 
+// 4.5부터 시청
 
 //StartAsyne 는 promise를 리턴하는 함수
 

@@ -3,7 +3,7 @@ import axios from "axios";
 const THDB_KEY = "43d1cb232767ef5c553e1bce9ae70ba2"; //apI 사용하기위한 key
 
 const makeRequest = (path, params) =>
-  axios.get(`https://api.themoviedb.org/3${path}`, {
+  axios.get(`https://api.themoviedb.org/3${path}`, {   //path 로 전달
     params: {
       ...params,
       api_key: THDB_KEY
@@ -23,7 +23,7 @@ const getAnything = async (path, params = {}) => {
   }
 };
 
-export const movieApi = {
+export const movieApi = {   //영화 관련API
   nowPlaying: () => getAnything("/movie/now_playing"),
   popular: () => getAnything("/movie/popular"),
   upcoming: () => getAnything("/movie/upcoming", { region: "kr" }),
@@ -32,7 +32,7 @@ export const movieApi = {
   discover: () => getAnything("/discover/movie")
 };
 
-export const tvApi = {
+export const tvApi = {  //TV관련 API
   today: () => getAnything("/tv/airing_today"),
   thisWeek: () => getAnything("/tv/on_the_air"),
   topRated: () => getAnything("/tv/top_rated"),
@@ -41,4 +41,4 @@ export const tvApi = {
   show: id => getAnything(`/tv/${id}`, { append_to_response: "videos" })
 };
 
-export const apiImage = (path) => `https://image.tmdb.org/t/p/w500${path}`
+export const apiImage = (path) => `https://image.tmdb.org/t/p/w500${path}`   //image 받아오는API
