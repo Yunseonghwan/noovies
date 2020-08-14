@@ -11,7 +11,7 @@ const Text = styled.Text`
 
 const Title = ({ title }) => <Text>{title}</Text>;
 
-Title.PropTypes = {
+Title.propTypes = {
   title: PropTypes.string.isRequired,
 };
 

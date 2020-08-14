@@ -3,6 +3,7 @@ import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { apiImage } from "../../api";
+import { trimText } from "../../utils";
 
 import Poster from "../Poster";
 import Votes from "../Votes";
@@ -60,30 +61,32 @@ const ButtonText = styled.Text`
   color: white;
 `;
 
-const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => (
-  <Container>
-    <BG
-      style={{ width: "100%", height: "100%" }}
-      source={{ uri: apiImage(backgroundImage) }}
-    />
+const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => {
+  return (
+    <Container>
+      <BG
+        style={{ width: "100%", height: "100%" }}
+        source={{ uri: apiImage(backgroundImage) }}
+      />
 
-    <Content>
-      <Poster url={apiImage(poster)} />
-      <Data>
-        <Title>{title.length > 40 ? `${title.slice(0, 40)}...` : title}</Title>
-        <VotesContainer>
-          <Votes votes={votes} />
-        </VotesContainer>
-        <Overview>{overview.slice(0, 110)}...</Overview>
-        <TouchableOpacity>
-          <Button>
-            <ButtonText>View Details</ButtonText>
-          </Button>
-        </TouchableOpacity>
-      </Data>
-    </Content>
-  </Container>
-);
+      <Content>
+        <Poster url={poster} />
+        <Data>
+          <Title>{trimText(title, 40)}</Title>
+          <VotesContainer>
+            <Votes votes={votes} />
+          </VotesContainer>
+          <Overview>{trimText(overview, 120)}</Overview>
+          <TouchableOpacity>
+            <Button>
+              <ButtonText>View Details</ButtonText>
+            </Button>
+          </TouchableOpacity>
+        </Data>
+      </Content>
+    </Container>
+  );
+};
 
 Slide.propTypes = {
   id: PropTypes.number.isRequired,
@@ -91,7 +94,8 @@ Slide.propTypes = {
   backgroundImage: PropTypes.string.isRequired,
   votes: PropTypes.number.isRequired,
   overview: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired
+  poster: PropTypes.string.isRequired,
+  backgroundImage: PropTypes.string.isRequired,
 };
 
 export default Slide;
