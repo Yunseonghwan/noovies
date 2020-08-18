@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import Title from './Title';
 
-const HorizontalSlider = ({title, children}) => (
+const HorizontalSlider = ({title, children, results}) => (
   <>
     <Title title={title} />
     <ScrollView

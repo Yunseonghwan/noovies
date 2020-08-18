@@ -2,19 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 
-import { apiImage } from "../api";
+import { apiImage } from "../../api";
 
 const Image = styled.Image`
-  width: 100px;
+  width: 150px;
   height: 160px;
   border-radius: 4px;
   color: white;
+  border-radius: 100;
 `;
 
-const Poster = ({ url }) => <Image source={{ uri: apiImage(url) }} />;
+const TvPoster = ({ url }) => <Image source={{ uri: apiImage(url) }} />;
 
-Poster.propTypes = {
+TvPoster.propTypes = {
   url: PropTypes.string
 };
 
-export default Poster;
+export default TvPoster;

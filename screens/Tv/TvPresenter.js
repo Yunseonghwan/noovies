@@ -10,6 +10,7 @@ import HorizontalSlider from "../../components/HorizontalSlider";
 import Vertical from "../../components/Vertical";
 import SlideContainer from "../../components/SlideContainer";
 import Slide from "../../components/Moives/Silde";
+import Rated from '../../components/Tv/Rated';
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
@@ -23,7 +24,7 @@ const Container = styled.View`
   margin-top: 20px;
 `;
 
-export default ({ loading, popular, topRated, today, thisWeek }) => (
+export default ({ loading, popular, topRated, today, thisWeek, popularity }) => (
   <ScrollContainer loading={loading}>
     <Container>
       <HorizontalSlider title="Popular">
@@ -39,13 +40,13 @@ export default ({ loading, popular, topRated, today, thisWeek }) => (
       </HorizontalSlider>
       <HorizontalSlider title="Top Rated">
         {topRated.map((show) => (
-          <Vertical
+          <Rated
             key={show.id}
             id={show.id}
             title={show.name}
             poster={show.poster_path}
+            popularity={show.popularity}
             votes={show.vote_average}
-
           />
         ))}
       </HorizontalSlider>

@@ -28,7 +28,7 @@ export default function App() {
   const loadAssets = () => {
     //promise 를 리턴해야하는 함수
     const images = cacheImages([
-      "https://images.unsplash.com/photo-1593962018193-7436bd5ea497?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "https://images.unsplash.com/photo-1562407680-948253e074d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
       require("./assets/splash.png"), //모듈로 이미지 가져오기
     ]);
     const fonts = cacheFonts([Ionicons.font]);

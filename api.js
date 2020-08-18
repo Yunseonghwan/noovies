@@ -41,4 +41,4 @@ export const tvApi = {  //TV관련 API
   show: id => getAnything(`/tv/${id}`, { append_to_response: "videos" })
 };
 
-export const apiImage = (path) => `https://image.tmdb.org/t/p/w500${path}`   //image 받아오는API
+export const apiImage = (path) => path ? `https://image.tmdb.org/t/p/w500${path}` : "https://images.unsplash.com/photo-1562407680-948253e074d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"   //image 받아오는API
