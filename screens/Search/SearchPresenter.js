@@ -6,7 +6,11 @@ import ResultContainer from "../../components/Search/ResultContainer";
 import ScrollContainer from "../../components/ScrollContainer";
 
 export default ({ movies, shows, keyword, onChange, onSubmit }) => (
-  <ScrollContainer contentContainerStyle={{ paddingTop: 10 }}>
+  <ScrollContainer
+    refreshFn={onSubmit}
+    loading={false}
+    contentContainerStyle={{ paddingTop: 10 }}
+  >
     <Input
       placeholder={"Write a keyword"}
       value={keyword}

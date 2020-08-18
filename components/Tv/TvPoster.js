@@ -9,7 +9,7 @@ const Image = styled.Image`
   height: 160px;
   border-radius: 4px;
   color: white;
-  border-radius: 100;
+  border-radius: 100px;
 `;
 
 const TvPoster = ({ url }) => <Image source={{ uri: apiImage(url) }} />;

@@ -21,8 +21,8 @@ const SliderContainer = styled.View`
 
 const Container = styled.View``;
 
-export default ({ nowPlaying, popular, upcoming, loading }) => (
-  <ScrollContainer loading={loading}>
+export default ({ refreshFn, nowPlaying, popular, upcoming, loading }) => (
+  <ScrollContainer loading={loading} refreshFn={refreshFn}>
     <>
       <SlideContainer>
         <SliderContainer>
