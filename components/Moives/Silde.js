@@ -2,9 +2,9 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import { useNavigation } from "@react-navigation/native";
 import { apiImage } from "../../api";
 import { trimText } from "../../utils";
-
 import Poster from "../Poster";
 import Votes from "../Votes";
 
@@ -61,7 +61,19 @@ const ButtonText = styled.Text`
   color: white;
 `;
 
-const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => {
+const Slide = ({ isTv = false, id, title, backgroundImage, votes, overview, poster }) => {
+  const navigation = useNavigation();
+  const goToDetail = () => {
+    navigation.navigate("Detail", {
+      isTv,
+      id,
+      title,
+      backgroundImage,
+      votes,
+      overview,
+      poster
+    })
+  };
   return (
     <Container>
       <BG
@@ -77,7 +89,7 @@ const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => {
             <Votes votes={votes} />
           </VotesContainer>
           <Overview>{trimText(overview, 120)}</Overview>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={goToDetail}>
             <Button>
               <ButtonText>View Details</ButtonText>
             </Button>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-
+import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 
 import TvPoster from "./TvPoster";
@@ -19,15 +19,28 @@ const Title = styled.Text`
   margin: 10px 0px 5px 0px;
 `;
 
-const Rated = ({ id, poster, title, votes }) => (
-  <TouchableOpacity>
-    <Container>
-      <TvPoster url={poster} />
-      <Title>{trimText(title, 10)}</Title>
-      <Votes votes={votes} />
-    </Container>
-  </TouchableOpacity>
-);
+const Rated = ({ isTv = false, id, poster, title, votes, overview }) => {
+  const navigation = useNavigation();
+  const goToDetail = () => {
+    navigation.navigate("Detail", {
+      isTv,
+      id,
+      title,
+      poster,
+      votes,
+      overview
+    })
+  }
+  return (
+    <TouchableOpacity onPress={goToDetail}>
+      <Container>
+        <TvPoster url={poster} />
+        <Title>{trimText(title, 10)}</Title>
+        <Votes votes={votes} />
+      </Container>
+    </TouchableOpacity>
+  );
+};
 
 Rated.propTypes = {
   poster: PropTypes.string.isRequired,

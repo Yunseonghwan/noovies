@@ -26,6 +26,7 @@ export default ({ movies, shows, keyword, onChange, onSubmit }) => (
             title={movie.title}
             votes={movie.vote_average}
             poster={movie.poster_path}
+            overview={movie.overview}
           />
         ))}
       </ResultContainer>
@@ -39,6 +40,7 @@ export default ({ movies, shows, keyword, onChange, onSubmit }) => (
             title={show.name}
             votes={show.vote_average}
             poster={show.poster_path}
+            overview={show.overview}
           />
         ))}
       </ResultContainer>

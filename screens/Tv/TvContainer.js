@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { tvApi } from "../../api";
 
-import TvPresenter from './TvPresenter';
+import TvPresenter from "./TvPresenter";
 
 export default () => {
   const [shows, setShows] = useState({
+    page: 1,
     loading: true,
     today: [],
     thisWeek: [],
@@ -16,29 +17,37 @@ export default () => {
     popularError: null,
   });
 
-  const getData = async () => {
+  const getData = async (page) => {
     const [today, todayError] = await tvApi.today();
     const [thisWeek, thisWeekError] = await tvApi.thisWeek();
     const [topRated, topRatedError] = await tvApi.topRated();
     const [popular, popularError] = await tvApi.popular();
     setShows({
-        loading: false,
-        today,
-        thisWeek,
-        topRated,
-        popular,
-        todayError,
-        thisWeekError,
-        topRatedError,
-        popularError
+      page: page + 1,
+      loading: false,
+      today,
+      thisWeek,
+      topRated,
+      popular,
+      todayError,
+      thisWeekError,
+      topRatedError,
+      popularError,
+    });
+  };
 
-    })
+  const handleLoadMore = () => {
+    getData();
   };
 
   useEffect(() => {
     getData();
   }, [shows]);
   return (
-    <TvPresenter refreshFn={getData} {...shows}/>
+    <TvPresenter
+      refreshFn={getData}
+      handleLoadMore={handleLoadMore}
+      {...shows}
+    />
   );
 };

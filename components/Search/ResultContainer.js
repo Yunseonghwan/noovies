@@ -8,7 +8,7 @@ import Title from '../Title';
 const Container = styled.View`
   flex-direction: row;
   flex-wrap:wrap;
-  margin-left: 20px;
+  margin-left: 15px;
 `;
 
 const ResultContainer = ({title, children

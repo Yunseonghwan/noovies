@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {
     ToastAndroid, BackHandler
 } from "react-native";
-import App from '../App';
+import Stack from '../navigation/Stack';
 
 export default class Back extends Component {
     constructor (props) {
@@ -42,9 +42,7 @@ export default class Back extends Component {
     }
     render(){
         return(
-            <App onPress={this.handleBackButton}/>
+            <Stack back={() => this.handleBackButton()}/>
         )
     }
-
-    // ... 이하 생략
 }
