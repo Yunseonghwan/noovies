@@ -20,10 +20,11 @@ const Title = styled.Text`
   margin: 10px 0px 5px 0px;
 `;
 
-const SearchResult = ({ id, poster, title, votes, overview }) => {
+const SearchResult = ({  isTv = false, id, poster, title, votes, overview }) => {
   const navigation = useNavigation();
   const goToDetail = () => {
     navigation.navigate("Detail", {
+      isTv,
       id,
       title,
       poster,

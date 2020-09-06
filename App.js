@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Image, StatusBar } from "react-native";
+import React, { useState, useFocueEffect, useCallback } from "react";
+import { Image, StatusBar, BackHandler, Alert } from "react-native";
 import { AppLoading } from "expo"; //api 앱 로딩화면
 import { Asset } from "expo-asset";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import Stack from "./navigation/Stack";
@@ -31,7 +31,7 @@ export default function App() {
       "https://images.unsplash.com/photo-1562407680-948253e074d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
       require("./assets/splash.png"), //모듈로 이미지 가져오기
     ]);
-    const fonts = cacheFonts([Ionicons.font]);
+    const fonts = cacheFonts([Ionicons.font, FontAwesome.font]);
     return Promise.all([...images, ...fonts]);
   };
 
@@ -39,10 +39,32 @@ export default function App() {
     setIsReady(true);
   };
 
-  return isReady ? ( 
+  //백핸들러 버튼
+
+  const ScreenWithCustomBackBehavior = () => {
+    useFocusEffect(
+      useCallback(() => {
+        const onBackPress = () => {
+          if (isSelectionModeEnabled()) {
+            disableSelectionMode();
+            return true;
+          } else {
+            return false;
+          }
+        };
+
+        BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+        return () =>
+          BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+      }, [isSelectionModeEnabled, disableSelectionMode])
+    );
+  };
+
+  return isReady ? (
     <>
-      <NavigationContainer>    
-        <Stack/>
+      <NavigationContainer onBackPress={ScreenWithCustomBackBehavior}>
+        <Stack />
       </NavigationContainer>
       <StatusBar barStyle="light-content" />
     </>

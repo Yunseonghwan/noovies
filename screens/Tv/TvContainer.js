@@ -36,17 +36,12 @@ export default () => {
     });
   };
 
-  const handleLoadMore = () => {
-    getData();
-  };
-
   useEffect(() => {
     getData();
   }, [shows]);
   return (
     <TvPresenter
       refreshFn={getData}
-      handleLoadMore={handleLoadMore}
       {...shows}
     />
   );

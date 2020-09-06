@@ -35,6 +35,7 @@ export default ({ movies, shows, keyword, onChange, onSubmit }) => (
       <ResultContainer title={"TV Results"}>
         {shows.map((show) => (
           <SearchResult
+            isTv={true}
             key={show.id}
             id={show.id}
             title={show.name}

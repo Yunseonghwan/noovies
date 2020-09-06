@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components/native";
 import ScrollContainer from "../../components/ScrollContainer";
-import { Dimensions, ActivityIndicator } from "react-native";
+import { Dimensions, ActivityIndicator, TouchableOpacity } from "react-native";
 
 import { apiImage } from "../../api";
 import Poster from "../../components/Poster";
 import Votes from "../../components/Votes";
 import { formatDate } from "../../utils";
+import Link from "../../components/Detail/Link";
 
 const BG = styled.Image`
   width: 100%;
@@ -58,65 +59,65 @@ const DataValue = styled.Text`
   font-weight: 500;
 `;
 
-export default ({ loading, result }) => (
+export default ({ openBrowser, loading, result }) => (
   <ScrollContainer
     loading={false}
     contentContainerStyle={{ paddingBottom: 80 }}
   >
     <>
       <Header>
-        <BG source={apiImage(result.backgroundImage, "-")} />
+        <BG source={{ uri: apiImage(result.backgroundImage, "-") }} />
         <Container>
           <Poster url={result.poster} />
           <Info>
             <Title>{result.title}</Title>
-            {result.votes && <Votes votes={result.votes} />}
+            {result.votes ? <Votes votes={result.votes} /> : null}
           </Info>
         </Container>
       </Header>
       <Data>
-        {result.overview && (
+        {result.overview ? (
           <>
             <DataName>OverView</DataName>
             <DataValue>{result.overview}</DataValue>
           </>
-        )}
-        {loading && (
+        ) : null}
+        {/* {loading ? (
           <ActivityIndicator color={"white"} style={{ marginTop: "30" }} />
-        )}
-        {result.spoken_languages && (
+        ) : null} */}
+        {result.spoken_languages ? (
           <>
             <DataName>Languages</DataName>
             <DataValue>
               {result.spoken_languages.map((l) => `${l.name} `)}
             </DataValue>
           </>
-        )}
-        {result.release_date && (
+        ) : null}
+        {result.release_date ? (
           <>
             <DataName>Release Date</DataName>
             <DataValue>{formatDate(result.release_date)}</DataValue>
           </>
-        )}
-        {result.status && (
+        ) : null}
+        {result.status ? (
           <>
             <DataName>Status</DataName>
             <DataValue>{result.status}</DataValue>
           </>
-        )}
-        {result.runtime && (
+        ) : null}
+        {result.runtime ? (
           <>
             <DataName>Runtime</DataName>
             <DataValue>{result.runtime} minutes</DataValue>
           </>
-        )}
-        {result.first_air_date && (
+        ) : null}
+        {result.first_air_date ? (
           <>
             <DataName>First Air Date</DataName>
             <DataValue>{formatDate(result.first_air_date)}</DataValue>
           </>
-        )}
-        {result.genres && (
+        ) : null}
+        {result.genres ? (
           <>
             <DataName>Genres</DataName>
             <DataValue>
@@ -125,13 +126,41 @@ export default ({ loading, result }) => (
               )}
             </DataValue>
           </>
-        )}
-        {result.number_of_episodes && (
+        ) : null}
+        {result.number_of_episodes ? (
           <>
             <DataName>Seasons / Episodes</DataName>
-            <DataValue>{result.number_of_seasons} / {result.number_of_episodes}</DataValue>
+            <DataValue>
+              {result.number_of_seasons} / {result.number_of_episodes}
+            </DataValue>
           </>
-        )}
+        ) : null}
+        {result.imdb_id ? (
+          <>
+            <Link
+              text={"IMDB Page"}
+              icon={"imdb"}
+              onPress={() =>
+                openBrowser(`https://www.imdb.com/title/${result.imdb_id}`)
+              }
+            />
+          </>
+        ) : null}
+        {result.videos.results?.length ? (
+          <>
+            <DataName>Videos</DataName>
+            {result.videos.results.map((video) => (
+              <Link
+                text={video.name}
+                key={video.id}
+                icon="youtube-play"
+                onPress={() =>
+                  openBrowser(`https://www.youtube.com/watch?v=${video.key}`)
+                }
+              />
+            ))}
+          </>
+        ) : null}
       </Data>
     </>
   </ScrollContainer>

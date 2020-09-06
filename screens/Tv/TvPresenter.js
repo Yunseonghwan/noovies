@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ScrollContainer from "../../components/ScrollContainer";
 import styled from "styled-components/native";
 import Swiper from "react-native-web-swiper";
@@ -31,7 +31,6 @@ const TvPresenter = ({
   topRated,
   today,
   thisWeek,
-  handleLoadMore,
 }) => {
   const horizontalContainer = () => {
     return (
@@ -101,7 +100,6 @@ const TvPresenter = ({
           <FlatList
             data={today}
             initialNumToRender={10}
-            onEndReached={today}
             keyExtractor={(show, index) => show.id}
             renderItem={horizontalContainer}
             onEndReachedThreshold={1}
